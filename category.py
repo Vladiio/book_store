@@ -3,7 +3,7 @@ The module contains a Category class.
 """
 
 
-import book
+from book_store import book
 
 
 class Category:
