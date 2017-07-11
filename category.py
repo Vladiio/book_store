@@ -23,7 +23,10 @@ class Category:
     def add_book(self, item):
         """Add book to the category """
         if isinstance(item, book.Book):
-            self.items[item.id] = item
+            if item.id not in self.items:
+                self.items[item.id] = item
+            else:
+                raise book.BookAlreadyExist(id=item.id)
 
     def find_by_title(self, title):
         """Return a book with specified title."""
