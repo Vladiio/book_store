@@ -21,7 +21,7 @@ class Category:
             print(item)
     
     def add_book(self, item):
-        """Add book to the category """
+        """Add book to the category."""
         if isinstance(item, book.Book):
             if item.id not in self.items:
                 self.items[item.id] = item
@@ -37,4 +37,10 @@ class Category:
             raise book.BookDoesNotExist(title=title)
     
     def find_by_id(self, id):
-        pass
+        try:
+            item = self.items[id] 
+        except KeyError:
+            raise book.BookDoesNotExist(id=id)
+        else:
+            return item
+
