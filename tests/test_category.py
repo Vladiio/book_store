@@ -31,4 +31,14 @@ class TestCategory:
     def test_find_by_title_does_not_exist(self, cat, item):
         with pytest.raises(book.BookDoesNotExist):
             cat.find_by_title("wrong title")
+    
+    def test_find_by_id(self, cat, item):
+        cat.add_book(item)
+        found_book = cat.find_by_id(item.id)
+        assert found_book is item
+    
+    def test_find_by_id_does_not_exist(self, cat, item):
+        with pytest.raises(book.BookDoesNotExist):
+            cat.find_by_id(item.id)
+
 
