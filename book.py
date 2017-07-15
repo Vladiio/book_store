@@ -26,16 +26,9 @@ class Book:
         self.id = Book._count
         self.title = title
         self.author = author
-        self._price = price
+        self.price = price
 
     def __str__(self):
         return "{0.id}, {0.title}, " \
                "{0.author}, {0.price}".format(self)
-    
-    @property
-    def price(self):
-        return self._price
 
-    @price.setter
-    def price(self, new_price):
-        self._price = float(new_price)

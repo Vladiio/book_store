@@ -41,8 +41,4 @@ class TestCategory:
         with pytest.raises(book.BookDoesNotExist):
             cat.find_by_id(item.id)
 
-    def test_set_price(self, cat, item):
-        cat.add_book(item)
-        cat.set_price(item.id, 20)
-        assert item.price == 20
 
