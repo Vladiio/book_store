@@ -37,10 +37,17 @@ class Category:
             raise book.BookDoesNotExist(title=title)
     
     def find_by_id(self, id):
+        """Return a book with specified id."""
         try:
             item = self.items[id] 
         except KeyError:
             raise book.BookDoesNotExist(id=id)
         else:
             return item
+    
+    def set_price(self, id, new_price):
+        """Set new price for book with spicified id."""
+        book = self.find_by_id(id)
+        book.price = new_price
 
+        
