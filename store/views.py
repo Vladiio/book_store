@@ -1,31 +1,35 @@
 from store.models import Book, Category
+from store import exc
 from database.conf import session
 
 
 class MainView:
-    def __init__(self):
-        self.session = session
         
     def get_categories(self, cat_name):
         if cat_name == "all":
-            result = self.session.query(Category).all() 
+            result = Category.objects().all()
         else:
-            result = self.session.query(Category).\
-                        filter(Category.name==cat_name)
+            result = Category.objects().filter(
+                    Category.name==cat_name).first()
         return result
 
     def get_books(self, cat_id):
         if cat_id == 0:
-            result = self.session.query(Book).all()
+            result = Book.objects().all()
         else:
-            result = self.session.query(Book).\
-                    filter(Category.id==cat_id).all()
+            result = Book.objects.filter(
+                    Category.id==cat_id).all()
         return result   
 
-    def create_book(self, category, 
+    def create_book(self, cat_name, 
                     title, author, price):
-        pass
-    
+        category = self.get_categories(cat_name)
+        if not category:
+            raise exc.ObjectDoesNotExist(cat_name)
+        book = Book(title=title, author=author,
+                    category_id=category.id, price=price)
+        book.save()
+         
     def create_category(self, cat_name):
         pass
 

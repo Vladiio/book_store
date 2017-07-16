@@ -17,6 +17,9 @@ class Book(Base):
 
     category = relationship("Category",
                             back_populates="books")
+    @classmethod
+    def objects(cls):
+        return session.query(cls)
 
     def __repr__(self):
         return "\t{0.id}\t{0.title}\t" \
@@ -34,6 +37,11 @@ class Category(Base):
     
     books = relationship("Book", order_by=Book.id,
                          back_populates="category")
+   
+    @classmethod
+    def objects(cls):
+        return session.query(cls)
+
     def __repr__(self):
         count = len(self.books)
         return f"\t{self.id}\t{self.name}\t{count}"
