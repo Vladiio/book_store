@@ -3,14 +3,17 @@ from client import commands
 
 class Menu:
     def __init__(self):
+        self.changes = False
         self.commands = {
             "/show_cats": commands.display_categories,
             "/show_books": commands.display_books,
+            "/add_book": commands.add_book,
             "/q": commands.quit,
         }
         self.template = "\n\tShow categories: {0:<10}" \
                         "\n\tShow books:      {1:<10}" \
-                        "\n\tQuit:            {2:<10}\n"
+                        "\n\tAdd new book:    {2:<10}" \
+                        "\n\tQuit:            {3:<10}\n"
 
     def run(self):
         while True:
@@ -22,5 +25,5 @@ class Menu:
             except KeyError:
                 print(f"{response} is invalid command")
             else:
-                action()
+                action(self)
 
