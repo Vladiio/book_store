@@ -8,9 +8,9 @@ class Menu:
             "/show_books": commands.display_books,
             "/q": commands.quit,
         }
-        self.template = "\nShow all categories: {0}\n" \
-                        "Show books from category" \
-                        "Quit: {1}\n"
+        self.template = "\n\tShow categories: {0:<10}" \
+                        "\n\tShow books:      {1:<10}" \
+                        "\n\tQuit:            {2:<10}\n"
 
     def run(self):
         while True:
