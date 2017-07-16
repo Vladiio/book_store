@@ -19,8 +19,8 @@ class Book(Base):
                             back_populates="books")
 
     def __repr__(self):
-        return "{0.id}, {0.title}, " \
-               "{0.author}, {0.price}".format(self)
+        return "\t{0.id}\t{0.title}\t" \
+               "{0.author}\t{0.price}".format(self)
 
     def save(self):
         session.add(self)
@@ -36,4 +36,4 @@ class Category(Base):
                          back_populates="category")
     def __repr__(self):
         count = len(self.books)
-        return f"{self.id}\t{self.name}\t{count}"
+        return f"\t{self.id}\t{self.name}\t{count}"
