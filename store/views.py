@@ -5,25 +5,25 @@ from database.conf import session
 
 class MainView:
         
-    def get_categories(self, cat_name):
-        if cat_name == "all":
-            result = Category.objects().all()
-        else:
-            result = Category.objects().filter(
-                    Category.name==cat_name).first()
-        return result
+    def get_category_list(self):
+        return Category.objects().all()
 
-    def get_books(self, cat_id):
-        if cat_id == 0:
-            result = Book.objects().all()
-        else:
-            result = Book.objects.filter(
-                    Category.id==cat_id).all()
-        return result   
+    def get_category(self, cat_name):
+        return Category.objects().filter(
+                      Category.name==cat_name).first()
+        
+    def get_book_list(self, cat_id):
+        return Book.objects().filter(
+                    Book.category_id==cat_id).all()
+
+    
+    def get_book(self, book_title):
+        return Book.objects().filter(
+                    Book.title==book_title).one()
 
     def create_book(self, cat_name, 
                     title, author, price):
-        category = self.get_categories(cat_name)
+        category = self.get_category(cat_name)
         if not category:
             raise exc.ObjectDoesNotExist(cat_name)
         book = Book(title=title, author=author,

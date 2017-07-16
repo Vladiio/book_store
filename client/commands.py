@@ -11,19 +11,22 @@ from database.conf import session
 def display_categories(request):
     cat_name = get_string("Enter category name please",
                           default="all")
-    cats = main_view.get_categories(cat_name)
     print("\tID\tNAME\tBOOKS")
-    for cat in cats:
+    if cat_name == "all":
+        cats = main_view.get_category_list()
+        for cat in cats:
+            print(cat)
+    else:
+        cat = main_view.get_category(cat_name)
         print(cat)
 
 
 def display_books(request):
-    cat_id = get_int("Enter category id please",
-                      default=0)
-    books = main_view.get_books(cat_id)
+    cat_id = get_int("Enter category id please")
     print("\tID\tTITLE\tAUTHOR\tPRICE") 
+    books = main_view.get_book_list(cat_id)
     for book in books:
-        print(book)
+         print(book)
 
 
 def add_book(request):
@@ -36,9 +39,10 @@ def add_book(request):
         request.changes = True
         print("Book created")
 
+
 def quit(request):
     if request.changes:
-        if get_string("Save changes?", "y/n") == "y":
+        if input("Save changes?(y/n): ") == "y":
             session.commit()
             print("Saved")
     print("Buy buy")
