@@ -18,7 +18,7 @@ class Book(Base):
     category = relationship("Category",
                             back_populates="books")
 
-    def __str__(self):
+    def __repr__(self):
         return "{0.id}, {0.title}, " \
                "{0.author}, {0.price}".format(self)
 
@@ -34,4 +34,6 @@ class Category(Base):
     
     books = relationship("Book", order_by=Book.id,
                          back_populates="category")
-
+    def __repr__(self):
+        count = len(self.books)
+        return f"{self.id}\t{self.name}\t{count}"
