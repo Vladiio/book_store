@@ -1,14 +1,18 @@
-from store.models import Book
+from store.models import Book, Category
 from database.conf import session
 
 
-def book_view():
-    books = session.query(Book).all()
-    return books
+class MainView:
+    def __init__(self):
+        self.session = session
+        
+    def get_all(self, model=Category):
+        return self.session.query(model).all() 
+
+    def get_books(self, cat_id):
+        return self.session.query(Book).\
+                filter(Category.id==cat_id).all()
 
 
-def add_book_view(title, author, price):
-    book = Book(title=title,
-                author=author,
-                price=price)
-    book.save()
+main_view = MainView()
+
