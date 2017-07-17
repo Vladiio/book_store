@@ -14,12 +14,13 @@ class AlchemyItem:
     
     def save(self):
         session.add(self)
+        session.commit()
 
 
 class Book(Base, AlchemyItem):
     __tablename__ = "books"
 
-    title = Column(String)
+    title = Column(String, unique=True)
     author = Column(String)
     price = Column(Integer)
     category_id = Column(Integer,
@@ -36,7 +37,7 @@ class Book(Base, AlchemyItem):
 class Category(Base, AlchemyItem):
     __tablename__ = "categories"
     
-    name = Column(String)
+    name = Column(String, unique=True)
     books = relationship("Book", order_by=Book.id,
                          back_populates="category")
 
