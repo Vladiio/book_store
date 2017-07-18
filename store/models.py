@@ -37,11 +37,11 @@ class Book(Base, AlchemyItem):
 class Category(Base, AlchemyItem):
     __tablename__ = "categories"
     
-    name = Column(String, unique=True)
+    title = Column(String, unique=True)
     books = relationship("Book", order_by=Book.id,
                          back_populates="category")
 
     def __repr__(self):
         count = len(self.books)
-        return f"\t{self.id}\t{self.name}\t{count}"
+        return f"\t{self.id}\t{self.title}\t{count}"
 
