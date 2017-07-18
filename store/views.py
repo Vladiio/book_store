@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm.exc import NoResultFound 
 
 from store.models import Book, Category
 from store import exc
@@ -31,8 +32,13 @@ class CategoryView(BaseView):
         super().__init__(Category)
         
     def get(self, title):
-        return self.model.objects().filter(
-                      self.model.name==title).one()
+        try:
+            category =  self.model.objects().filter(
+                             self.model.name==title).one()
+        except NoResultFound:
+            raise exc.CategoryDoesNotExist(title)
+        else:
+            return category
         
     def create(self, cat_name):
         cat = self.model(name=cat_name)
@@ -51,8 +57,13 @@ class BookView(BaseView):
         super().__init__(Book)
 
     def get(self, title):
-        return self.model.objects().filter(
-                    self.model.title==title).one()
+        try:
+            book = self.model.objects().filter(
+                        self.model.title==title).one()
+        except NoResultFound:
+            raise exc.BookDoesNotExist(title)
+        else:
+            return book
 
     def fetch(self, cat_id):
         return self.model.objects().filter(
@@ -60,11 +71,14 @@ class BookView(BaseView):
 
     def create(self, cat_name, 
                title, author, price):
-        category = category_view.get(cat_name)
-        
-        book = Book(title=title, author=author,
-                    category_id=category.id, price=price)
-        book.save()
+        try:
+            category = category_view.get(cat_name)
+        except IntegrityError:
+            raise exc.BookAlreadyExist(title)
+        else:
+            book = Book(title=title, author=author,
+                        category_id=category.id, price=price)
+            book.save()
 
 
 book_view = BookView()
