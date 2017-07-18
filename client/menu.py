@@ -1,21 +1,23 @@
-from client import commands
+from client.commands import commander
 
 
 class Menu:
     def __init__(self):
         self.changes = False
         self.commands = {
-            "/show_cats": commands.display_categories,
-            "/show_books": commands.display_books,
-            "/add_category": commands.add_category,
-            "/add_book": commands.add_book,
-            "/q": commands.quit,
+            "lsc": commander.display_category_list,
+            "lsb": commander.display_book_list,
+            "gb": commander.display_book,
+            "ac": commander.add_category,
+            "ab": commander.add_book,
+            "q": commander.quit,
         }
         self.template = "\n\tShow categories: {0:<10}" \
                         "\n\tShow books:      {1:<10}" \
-                        "\n\tAdd new cat:     {2:<10}" \
-                        "\n\tAdd new book:    {3:<10}" \
-                        "\n\tQuit:            {4:<10}\n"
+                        "\n\tGet book:        {2:<10}" \
+                        "\n\tAdd new cat:     {3:<10}" \
+                        "\n\tAdd new book:    {4:<10}" \
+                        "\n\tQuit:            {5:<10}\n"
 
     def run(self):
         while True:
@@ -27,5 +29,5 @@ class Menu:
             except KeyError:
                 print(f"{response} is invalid command")
             else:
-                action(self)
+                action()
 
