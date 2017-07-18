@@ -4,8 +4,11 @@ def get_book_info():
     title = get_string("Title")
     author = get_string("Author")
     price = get_int("Price")
-    cat_name = get_string("Category name")
-    return (cat_name, title, author, price) 
+    category_id = get_int("Category id")
+    return dict(category_id=category_id,
+                title=title,
+                author=author,
+                price=price) 
 
 
 def get_int(msg, default=None):
