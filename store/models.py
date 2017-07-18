@@ -7,6 +7,7 @@ from database.conf import Base, session
 
 class AlchemyItem:
     id = Column(Integer, primary_key=True)
+    title = Column(String, unique=True)
 
     @classmethod
     def objects(cls):
@@ -20,7 +21,6 @@ class AlchemyItem:
 class Book(Base, AlchemyItem):
     __tablename__ = "books"
 
-    title = Column(String, unique=True)
     author = Column(String)
     price = Column(Integer)
     category_id = Column(Integer,
@@ -37,7 +37,6 @@ class Book(Base, AlchemyItem):
 class Category(Base, AlchemyItem):
     __tablename__ = "categories"
     
-    title = Column(String, unique=True)
     books = relationship("Book", order_by=Book.id,
                          back_populates="category")
 
