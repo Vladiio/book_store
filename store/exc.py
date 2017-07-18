@@ -7,17 +7,10 @@ class StoreException(Exception):
         super().__init__(*args, **kwargs)
 
 
-class CategoryDoesNotExist(StoreException):
+class ObjectDoesNotExist(StoreException):
     pass
 
 
-class BookDoesNotExist(StoreException):
+class ObjectAlreadyExist(StoreException):
     pass
 
-
-class CategoryAlreadyExist(StoreException):
-    pass
-
-
-class BookAlreadyExist(StoreException):
-    pass
