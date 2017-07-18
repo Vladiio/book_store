@@ -7,17 +7,19 @@ class Menu:
         self.commands = {
             "lsc": commander.display_category_list,
             "lsb": commander.display_book_list,
+            "gc": commander.display_category,
             "gb": commander.display_book,
             "ac": commander.add_category,
             "ab": commander.add_book,
             "q": commander.quit,
         }
-        self.template = "\n\tShow categories: {0:<10}" \
-                        "\n\tShow books:      {1:<10}" \
-                        "\n\tGet book:        {2:<10}" \
-                        "\n\tAdd new cat:     {3:<10}" \
-                        "\n\tAdd new book:    {4:<10}" \
-                        "\n\tQuit:            {5:<10}\n"
+        self.template = "\n\tShow categories: {:<10}" \
+                        "\n\tShow books:      {:<10}" \
+                        "\n\tGet category:    {:<10}" \
+                        "\n\tGet book:        {:<10}" \
+                        "\n\tAdd new cat:     {:<10}" \
+                        "\n\tAdd new book:    {:<10}" \
+                        "\n\tQuit:            {:<10}\n"
 
     def run(self):
         while True:
