@@ -34,9 +34,6 @@ class CategoryView(BaseView):
         return self.model.objects().filter(
                       self.model.name==title).one()
         
-    def fetch_books(self, cat_id):
-        return self.model.objects().books.all()
-         
     def create(self, cat_name):
         cat = self.model(name=cat_name)
         try:
@@ -56,7 +53,11 @@ class BookView(BaseView):
     def get(self, title):
         return self.model.objects().filter(
                     self.model.title==title).one()
-    
+
+    def fetch(self, cat_id):
+        return self.model.objects().filter(
+                    self.model.category_id==cat_id).all()
+
     def create(self, cat_name, 
                title, author, price):
         category = category_view.get(cat_name)

@@ -11,8 +11,8 @@ from database.conf import session
 def display_categories(request):
     cat_name = get_string("Enter category name please",
                           default="all")
+    print("\tID\tNAME\tBOOKS")
     if cat_name == "all":
-        print("\tID\tNAME\tBOOKS")
         cats = category_view.get_all()
         for cat in cats:
             print(cat)
@@ -23,7 +23,7 @@ def display_categories(request):
 
 def display_books(request):
     cat_id = get_int("Enter category id please")
-    books = category_view.get(cat_id)
+    books = book_view.fetch(cat_id)
     print("\tID\tTITLE\tAUTHOR\tPRICE") 
     for book in books:
          print(book)
