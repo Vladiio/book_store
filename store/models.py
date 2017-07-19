@@ -13,13 +13,19 @@ class AlchemyItem:
     id = Column(Integer, primary_key=True)
     title = Column(String, unique=True)
 
+    def __init__(self, *args, **kwargs):
+        super.__init__(*args, **kwargs)
+        session.add(self)
+
     @classmethod
     def objects(cls):
         return session.query(cls)
     
     def save(self):
-        session.add(self)
         session.commit()
+
+    def delete(self):
+        session.delete(self)
 
 
 class Book(Base, AlchemyItem):
