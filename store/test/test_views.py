@@ -9,7 +9,7 @@ from store import exc
 def category(request): 
     new_cat = Category(title="Test_cat2")
     def del_item():
-        print("Cleaning..")
+        print("Removing...")
         new_cat.delete()
     request.addfinalizer(del_item)
     return new_cat
