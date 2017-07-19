@@ -6,8 +6,7 @@ def get_book_info():
     price = get_int("Price")
     category_id = get_int("Category id")
     return dict(category_id=category_id,
-                title=title,
-                author=author,
+                title=title, author=author,
                 price=price) 
 
 

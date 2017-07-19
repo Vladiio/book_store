@@ -18,7 +18,7 @@ class BaseView:
     def get(self, title):
         try:
             obj =  self.model.objects().filter(
-                             self.model.title==title).one()
+                        self.model.title==title).one()
         except NoResultFound:
             raise exc.ObjectDoesNotExist(title)
         else:

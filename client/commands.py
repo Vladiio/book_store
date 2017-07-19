@@ -36,8 +36,7 @@ class Commander:
             print(f"There is no category {err.name}")
         else:
             print(self.book_header)
-            print(cat)
-        
+            print(cat)        
 
     def display_book(self):
         book_title = get_string("Enter book title please")

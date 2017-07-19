@@ -23,11 +23,11 @@ class Book(Base, AlchemyItem):
 
     author = Column(String)
     price = Column(Integer)
-    category_id = Column(Integer,
-                         ForeignKey("categories.id"))
+    category_id = Column(
+        Integer, ForeignKey("categories.id"))
 
-    category = relationship("Category",
-                            back_populates="books")
+    category = relationship(
+        "Category", back_populates="books")
 
     def __repr__(self):
         return "\t{0.id}\t{0.title}\t" \
@@ -37,8 +37,9 @@ class Book(Base, AlchemyItem):
 class Category(Base, AlchemyItem):
     __tablename__ = "categories"
     
-    books = relationship("Book", order_by=Book.id,
-                         back_populates="category")
+    books = relationship(
+        "Book", order_by=Book.id,
+        back_populates="category")
 
     def __repr__(self):
         count = len(self.books)
