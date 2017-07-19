@@ -1,6 +1,6 @@
 #! /usr/bin/env python
-from database.conf import engine
 
+from store.settings import engine
 from store.models import Base
 
 
