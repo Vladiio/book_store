@@ -1,8 +1,12 @@
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, \
          String, ForeignKey
 from sqlalchemy.orm import relationship
 
-from database.conf import Base, session
+from store.settings import session
+
+
+Base = declarative_base()
 
 
 class AlchemyItem:
@@ -30,8 +34,8 @@ class Book(Base, AlchemyItem):
         "Category", back_populates="books")
 
     def __repr__(self):
-        return "\t{0.id}\t{0.title}\t" \
-               "{0.author}\t{0.price}".format(self)
+        return ("\t{0.id}\t{0.title}\t"
+                "{0.author}\t{0.price}").format(self)
 
 
 class Category(Base, AlchemyItem):

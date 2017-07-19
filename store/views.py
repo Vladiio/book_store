@@ -3,8 +3,7 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from store.models import Book, Category
 from store import exc
-from database.conf import session
-
+from store.settings import session
 
 
 class BaseView:

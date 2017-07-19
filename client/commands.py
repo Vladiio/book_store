@@ -5,7 +5,6 @@ from store.models import Category, Book
 from store import exc
 from client.utils import get_int, get_string, \
         get_book_info
-from database.conf import session
 
 
 class Commander:
